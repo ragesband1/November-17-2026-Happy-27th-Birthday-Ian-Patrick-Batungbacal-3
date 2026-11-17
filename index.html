@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 27th Birthday Ian Patrick Batungbacal!</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins & Fredoka -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .font-fredoka {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.8)); }
+            50% { filter: drop-shadow(0 0 35px rgba(234, 179, 8, 1)); }
+        }
+        .glow-effect {
+            animation: pulse-glow 3s infinite;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .animate-wiggle {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1b4b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-purple-950 to-indigo-950 text-white min-h-screen relative overflow-x-hidden">
+
+    <!-- Canvas for Fireworks & Confetti -->
+    <canvas id="fx-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+    <!-- Header & Grand Banner -->
+    <header class="relative z-10 text-center py-12 px-4 bg-gradient-to-r from-purple-900/40 via-pink-900/40 to-indigo-900/40 backdrop-blur-md border-b border-pink-500/30 shadow-2xl">
+        <div class="max-w-5xl mx-auto">
+            <span class="inline-block bg-gradient-to-r from-yellow-400 to-pink-500 text-slate-950 font-bold px-6 py-2 rounded-full text-sm md:text-base mb-4 shadow-lg animate-bounce">
+                🎉 November 18, 2026 • TODAY IS THE BIG DAY! 🎉
+            </span>
+            <h1 class="font-fredoka text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight bg-gradient-to-r from-pink-400 via-yellow-300 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg mb-4">
+                Happy 27th Birthday,<br class="hidden sm:inline"> Ian Patrick Batungbacal!
+            </h1>
+            <p class="text-lg md:text-2xl text-purple-200 font-light max-w-2xl mx-auto">
+                Welcome to your ultimate extravagant surprise party! Get ready for epic fireworks, magical cakes, funny clowns, and joyous celebrations at Evergreen Executive Village, Caloocan City!
+            </p>
+            
+            <!-- Quick Action Triggers -->
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+                <button onclick="triggerGrandFinale()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 flex items-center gap-3 text-lg">
+                    <i class="fa-solid fa-fireworks text-yellow-300"></i> Launch Grand Fireworks!
+                </button>
+                <button onclick="togglePartyMusic()" id="music-btn" class="bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-slate-950 font-bold px-8 py-4 rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 flex items-center gap-3 text-lg">
+                    <i class="fa-solid fa-music"></i> <span id="music-btn-text">Play Party Beats</span>
+                </button>
+                <button onclick="triggerConfettiShower()" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl transform hover:scale-105 transition duration-300 flex items-center gap-3 text-lg">
+                    <i class="fa-solid fa-champagne-glasses"></i> Confetti Rain!
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- SECTION 1: Interactive Birthday Cake -->
+        <section class="bg-slate-900/80 backdrop-blur-xl border border-pink-500/30 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <h2 class="font-fredoka text-3xl md:text-4xl font-bold text-pink-400 mb-2">
+                    🎂 Ian's Magical 27th Birthday Cake
+                </h2>
+                <p class="text-slate-300">Click the candles to blow them out one by one, cut a slice, or make a secret birthday wish!</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-10">
+                <!-- Cake Display Area -->
+                <div class="relative cursor-pointer group" onclick="handleCakeInteraction()">
+                    <div class="w-64 h-72 md:w-80 md:h-96 relative flex flex-col items-center justify-end glow-effect">
+                        <!-- Candles -->
+                        <div id="candles-container" class="flex gap-4 z-20 mb-[-10px]">
+                            <!-- Candle 1 (Number 2) -->
+                            <div class="flex flex-col items-center candle" onclick="extinguishCandle(event, 0)">
+                                <div class="flame w-4 h-8 bg-gradient-to-t from-orange-500 to-yellow-300 rounded-full animate-bounce"></div>
+                                <div class="w-6 h-16 bg-pink-400 rounded-t-sm flex items-center justify-center text-xs font-bold text-white shadow-md">2</div>
+                            </div>
+                            <!-- Candle 2 (Number 7) -->
+                            <div class="flex flex-col items-center candle" onclick="extinguishCandle(event, 1)">
+                                <div class="flame w-4 h-8 bg-gradient-to-t from-orange-500 to-yellow-300 rounded-full animate-bounce"></div>
+                                <div class="w-6 h-16 bg-yellow-400 rounded-t-sm flex items-center justify-center text-xs font-bold text-slate-950 shadow-md">7</div>
+                            </div>
+                        </div>
+
+                        <!-- Top Tier -->
+                        <div class="w-48 h-20 bg-gradient-to-r from-pink-500 via-rose-400 to-pink-500 rounded-t-2xl shadow-lg relative border-t-4 border-white/40 flex items-center justify-center">
+                            <span class="font-fredoka text-white text-sm tracking-widest drop-shadow">IAN PATRICK</span>
+                        </div>
+                        <!-- Middle Tier -->
+                        <div class="w-64 h-24 bg-gradient-to-r from-purple-600 via-indigo-500 to-purple-600 rounded-t-lg shadow-xl relative border-t-4 border-white/30 flex items-center justify-center">
+                            <span class="font-fredoka text-yellow-300 text-lg tracking-wider drop-shadow">HAPPY 27TH!</span>
+                        </div>
+                        <!-- Bottom Tier -->
+                        <div class="w-80 h-28 bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 rounded-t-xl shadow-2xl relative border-t-4 border-white/30 flex items-center justify-center">
+                            <span class="font-fredoka text-white/90 text-sm">November 18, 2026</span>
+                        </div>
+                        <!-- Plate -->
+                        <div class="w-96 h-4 bg-slate-300/80 rounded-full shadow-2xl"></div>
+                    </div>
+                </div>
+
+                <!-- Cake Controls & Wish Box -->
+                <div class="flex flex-col gap-4 w-full md:w-96">
+                    <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-6 shadow-inner">
+                        <h3 class="font-fredoka text-xl text-yellow-300 mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Birthday Wish Generator
+                        </h3>
+                        <p id="cake-status" class="text-slate-300 text-sm mb-4">Candles are burning bright! Click the candles on the cake or use the button below to blow them out.</p>
+                        
+                        <div class="space-y-3">
+                            <button onclick="blowAllCandles()" class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-wind"></i> Blow All Candles Out!
+                            </button>
+                            <button onclick="cutTheCake()" class="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cake-candles"></i> Cut A Delicious Slice!
+                            </button>
+                            <button onclick="resetCake()" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-2 px-4 rounded-xl transition duration-200 text-sm">
+                                Reset Cake & Relight Candles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: AI Voice Greeting & Audio Suite -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- AI Voice Synthesizer & Greeting Simulator -->
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-indigo-500/30 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-600/30 border border-indigo-400/40 flex items-center justify-center text-indigo-400 text-xl">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-fredoka text-2xl font-bold text-indigo-300">AI Voice Birthday Greeting</h3>
+                            <p class="text-slate-400 text-sm">Listen to the AI party host speak out loud to Ian!</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 text-slate-200 mb-6 italic text-sm leading-relaxed">
+                        "Happy 27th Birthday to the legendary Ian Patrick Batungbacal! May your day be filled with immense joy, unstoppable success, incredible cake, and unforgettable moments. Cheers to November 18, 2026!"
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="speakAIGreeting()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-volume-high"></i> Speak AI Greeting
+                    </button>
+                    <button onclick="stopAIGreeting()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-3 px-4 rounded-xl transition duration-200">
+                        <i class="fa-solid fa-stop"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sound Effects & Music Recorder Simulator -->
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-pink-500/30 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-600/30 border border-pink-400/40 flex items-center justify-center text-pink-400 text-xl">
+                            <i class="fa-solid fa-microphone-lines"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-fredoka text-2xl font-bold text-pink-300">Soundboard & MP3 Studio</h3>
+                            <p class="text-slate-400 text-sm">Trigger celebratory sound effects & record voice notes!</p>
+                        </div>
+                    </div>
+
+                    <!-- Soundboard Grid -->
+                    <div class="grid grid-cols-3 gap-3 mb-6">
+                        <button onclick="playSoundEffect('cheer')" class="bg-slate-800 hover:bg-pink-900/40 border border-pink-500/30 text-pink-300 font-semibold py-3 px-2 rounded-xl text-xs md:text-sm transition duration-200 flex flex-col items-center gap-1">
+                            <i class="fa-solid fa-hands-clapping text-lg"></i> Crowd Cheer
+                        </button>
+                        <button onclick="playSoundEffect('horn')" class="bg-slate-800 hover:bg-yellow-900/40 border border-yellow-500/30 text-yellow-300 font-semibold py-3 px-2 rounded-xl text-xs md:text-sm transition duration-200 flex flex-col items-center gap-1">
+                            <i class="fa-solid fa-bullhorn text-lg"></i> Party Horn
+                        </button>
+                        <button onclick="playSoundEffect('pop')" class="bg-slate-800 hover:bg-cyan-900/40 border border-cyan-500/30 text-cyan-300 font-semibold py-3 px-2 rounded-xl text-xs md:text-sm transition duration-200 flex flex-col items-center gap-1">
+                            <i class="fa-solid fa-wand-magic text-lg"></i> Magic Pop
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recorder Simulator Widget -->
+                <div class="bg-slate-800/90 border border-slate-700 rounded-2xl p-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div id="recorder-indicator" class="w-4 h-4 rounded-full bg-slate-600"></div>
+                        <div>
+                            <div class="font-bold text-sm text-white" id="recorder-status-text">Voice Recorder Ready</div>
+                            <div class="text-xs text-slate-400" id="recorder-timer">00:00</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="toggleRecordVoice()" id="record-action-btn" class="bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-200 flex items-center gap-2">
+                            <i class="fa-solid fa-circle text-xs"></i> Record
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Voodoo Good-Luck Charms & Aroma Scent Visualizer -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Voodoo Good Luck Dolls -->
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-purple-500/30 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-600/30 border border-purple-400/40 flex items-center justify-center text-purple-400 text-xl">
+                        <i class="fa-solid fa-ghost"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-fredoka text-2xl font-bold text-purple-300">Voodoo Good-Luck Charms</h3>
+                        <p class="text-slate-400 text-sm">Humorous little buddies warding off bad vibes for Ian!</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 my-6">
+                    <div onclick="pokeVoodooDoll(0)" class="bg-slate-800/80 border border-purple-500/20 rounded-2xl p-4 text-center cursor-pointer hover:border-purple-400 transition duration-300 group">
+                        <div class="text-4xl mb-2 transform group-hover:scale-125 transition duration-300">🧸</div>
+                        <div class="font-bold text-sm text-purple-200">Captain Joy</div>
+                        <div class="text-xs text-slate-400 mt-1">Status: Shielded</div>
+                    </div>
+                    <div onclick="pokeVoodooDoll(1)" class="bg-slate-800/80 border border-purple-500/20 rounded-2xl p-4 text-center cursor-pointer hover:border-purple-400 transition duration-300 group">
+                        <div class="text-4xl mb-2 transform group-hover:scale-125 transition duration-300">🪆</div>
+                        <div class="font-bold text-sm text-purple-200">Madame Luck</div>
+                        <div class="text-xs text-slate-400 mt-1">Status: Glowing</div>
+                    </div>
+                    <div onclick="pokeVoodooDoll(2)" class="bg-slate-800/80 border border-purple-500/20 rounded-2xl p-4 text-center cursor-pointer hover:border-purple-400 transition duration-300 group">
+                        <div class="text-4xl mb-2 transform group-hover:scale-125 transition duration-300">🧙‍♂️</div>
+                        <div class="font-bold text-sm text-purple-200">Wizard Bob</div>
+                        <div class="text-xs text-slate-400 mt-1">Status: Blessing</div>
+                    </div>
+                </div>
+                <p id="voodoo-msg" class="text-center text-sm text-purple-300 italic">Click a voodoo charm to trigger a magical blessing for Ian!</p>
+            </div>
+
+            <!-- Aroma Scent Visualizer -->
+            <div class="bg-slate-900/80 backdrop-blur-xl border border-yellow-500/30 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-yellow-600/30 border border-yellow-400/40 flex items-center justify-center text-yellow-400 text-xl">
+                            <i class="fa-solid fa-wind"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-fredoka text-2xl font-bold text-yellow-300">Party Aroma Scent Visualizer</h3>
+                            <p class="text-slate-400 text-sm">Releasing luxurious fragrances into Ian's birthday atmosphere!</p>
+                        </div>
+                    </div>
+
+                    <!-- Scent Wave Animation Area -->
+                    <div class="bg-slate-950/80 border border-yellow-500/20 rounded-2xl p-6 my-4 text-center relative overflow-hidden h-32 flex flex-col items-center justify-center">
+                        <div id="aroma-waves" class="absolute inset-0 flex items-center justify-center opacity-40 pointer-events-none">
+                            <div class="w-24 h-24 rounded-full border-4 border-yellow-400 animate-ping absolute"></div>
+                            <div class="w-48 h-48 rounded-full border-2 border-pink-400 animate-ping absolute" style="animation-delay: 1s;"></div>
+                        </div>
+                        <div id="aroma-display" class="relative z-10 font-fredoka text-xl text-yellow-200">
+                            ✨ Select an aroma profile below ✨
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <button onclick="triggerAroma('Sweet Vanilla Cake')" class="bg-slate-800 hover:bg-yellow-900/40 border border-yellow-500/30 text-yellow-300 font-semibold py-2 px-2 rounded-xl text-xs transition duration-200">
+                        🎂 Vanilla Cake
+                    </button>
+                    <button onclick="triggerAroma('Sparkling Champagne')" class="bg-slate-800 hover:bg-yellow-900/40 border border-yellow-500/30 text-yellow-300 font-semibold py-2 px-2 rounded-xl text-xs transition duration-200">
+                        🍾 Champagne
+                    </button>
+                    <button onclick="triggerAroma('Tropical Fireworks')" class="bg-slate-800 hover:bg-yellow-900/40 border border-yellow-500/30 text-yellow-300 font-semibold py-2 px-2 rounded-xl text-xs transition duration-200">
+                        🎇 Fireworks
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: 100 Clowns & Joyful Party GIFs Gallery -->
+        <section class="bg-slate-900/80 backdrop-blur-xl border border-pink-500/30 rounded-3xl p-6 md:p-10 shadow-2xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <div>
+                    <h2 class="font-fredoka text-3xl md:text-4xl font-bold text-pink-400 mb-2">
+                        🤡 Clowns & 100 Party GIFs Celebration Gallery
+                    </h2>
+                    <p class="text-slate-300">A vibrant collection of circus clowns, cheerful balloons, and festive party animations!</p>
+                </div>
+                <div class="bg-pink-500/20 border border-pink-500/40 px-5 py-2 rounded-2xl text-pink-300 font-bold text-sm self-start md:self-auto">
+                    🎉 100 GIF Celebration Mode Active
+                </div>
+            </div>
+
+            <!-- GIF Grid -->
+            <div id="gif-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-10 bg-slate-950/80 border-t border-slate-800 text-slate-400 text-sm mt-20">
+        <div class="max-w-4xl mx-auto px-4 space-y-3">
+            <p class="font-fredoka text-lg text-pink-400">Happy 27th Birthday, Ian Patrick Batungbacal! 🎂✨</p>
+            <p>Created with boundless joy, fireworks, confetti, and magical party vibes for November 18, 2026 at Evergreen Executive Village, Caloocan City.</p>
+        </div>
+    </footer>
+
+    <!-- Message Box Modal -->
+    <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm hidden">
+        <div class="bg-slate-900 border border-pink-500/50 rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl text-center transform scale-95 transition duration-300" id="modal-box">
+            <div id="modal-icon" class="text-5xl text-yellow-400 mb-4">🎉</div>
+            <h3 id="modal-title" class="font-fredoka text-2xl font-bold text-white mb-2">Wonderful!</h3>
+            <p id="modal-message" class="text-slate-300 mb-6 leading-relaxed">Message description goes here.</p>
+            <button onclick="closeModal()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-200">
+                Awesome!
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // --- Custom Modal Handler ---
+        function showModal(title, message, icon) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-icon').innerText = icon || "🎉";
+            const modal = document.getElementById('custom-modal');
+            modal.classList.remove('hidden');
+            setTimeout(function() {
+                document.getElementById('modal-box').classList.remove('scale-95');
+                document.getElementById('modal-box').classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            document.getElementById('modal-box').classList.remove('scale-100');
+            document.getElementById('modal-box').classList.add('scale-95');
+            setTimeout(function() {
+                document.getElementById('custom-modal').classList.add('hidden');
+            }, 200);
+        }
+
+        // --- Canvas Fireworks & Confetti Engine ---
+        const canvas = document.getElementById('fx-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let fireworks = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function Firework(startX, startY, targetX, targetY) {
+            this.x = startX;
+            this.y = startY;
+            this.targetX = targetX;
+            this.targetY = targetY;
+            this.distanceToTarget = Math.hypot(targetX - startX, targetY - startY);
+            this.distanceTraveled = 0;
+            this.coordinates = [];
+            this.coordinateCount = 3;
+            for (let i = 0; i < this.coordinateCount; i++) {
+                this.coordinates.push([this.x, this.y]);
+            }
+            this.angle = Math.atan2(targetY - startY, targetX - startX);
+            this.speed = 15;
+            this.acceleration = 1.05;
+        }
+
+        Firework.prototype.update = function(index) {
+            this.coordinates.pop();
+            this.coordinates.unshift([this.x, this.y]);
+            this.speed *= this.acceleration;
+            let vx = Math.cos(this.angle) * this.speed;
+            let vy = Math.sin(this.angle) * this.speed;
+            this.distanceTraveled = Math.hypot(this.x - startX, this.y - startY) + Math.hypot(vx, vy);
+            if (this.distanceTraveled >= this.distanceToTarget) {
+                createParticles(this.targetX, this.targetY);
+                fireworks.splice(index, 1);
+            } else {
+                this.x += vx;
+                this.y += vy;
+            }
+        };
+
+        Firework.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+            ctx.lineTo(this.x, this.y);
+            ctx.strokeStyle = 'hsl(' + (Math.random() * 360) + ', 100%, 50%)';
+            ctx.stroke();
+        };
+
+        function Particle(x, y) {
+            this.x = x;
+            this.y = y;
+            this.coordinates = [];
+            this.coordinateCount = 5;
+            for (let i = 0; i < this.coordinateCount; i++) {
+                this.coordinates.push([this.x, this.y]);
+            }
+            this.angle = Math.random() * Math.PI * 2;
+            this.speed = Math.random() * 15 + 2;
+            this.friction = 0.95;
+            this.gravity = 1;
+            this.hue = Math.random() * 360;
+            this.brightness = Math.random() * 50 + 50;
+            this.alpha = 1;
+            this.decay = Math.random() * 0.015 + 0.007;
+        }
+
+        Particle.prototype.update = function(index) {
+            this.coordinates.pop();
+            this.coordinates.unshift([this.x, this.y]);
+            this.speed *= this.friction;
+            this.x += Math.cos(this.angle) * this.speed;
+            this.y += Math.sin(this.angle) * this.speed + this.gravity;
+            this.alpha -= this.decay;
+            if (this.alpha <= this.decay) {
+                particles.splice(index, 1);
+            }
+        };
+
+        Particle.prototype.draw = function() {
+            ctx.beginPath();
+            ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+            ctx.lineTo(this.x, this.y);
+            ctx.strokeStyle = 'hsla(' + this.hue + ', 100%, ' + this.brightness + '%, ' + this.alpha + ')';
+            ctx.stroke();
+        };
+
+        function createParticles(x, y) {
+            let particleCount = 60;
+            while (particleCount--) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        let startX = canvas.width / 2;
+        let startY = canvas.height;
+
+        function triggerGrandFinale() {
+            playSoundEffect('pop');
+            showModal("Grand Fireworks Activated!", "Spectacular fireworks are lighting up the sky for Ian Patrick Batungbacal's 27th Birthday! Happy November 18, 2026!", "🎇");
+            for (let i = 0; i < 8; i++) {
+                setTimeout(function() {
+                    let tx = Math.random() * canvas.width;
+                    let ty = Math.random() * (canvas.height * 0.6);
+                    fireworks.push(new Firework(canvas.width / 2, canvas.height, tx, ty));
+                }, i * 250);
+            }
+        }
+
+        function triggerConfettiShower() {
+            playSoundEffect('horn');
+            showModal("Confetti Rain!", "A magnificent wave of sparkling confetti showers down in honor of Ian!", "🎊");
+            for (let i = 0; i < 150; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * (canvas.height * 0.5)));
+            }
+        }
+
+        // Animation Loop
+        function loop() {
+            requestAnimationFrame(loop);
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.globalCompositeOperation = 'lighter';
+
+            let i = fireworks.length;
+            while (i--) {
+                fireworks[i].draw();
+                fireworks[i].update(i);
+            }
+
+            let j = particles.length;
+            while (j--) {
+                particles[j].draw();
+                particles[j].update(j);
+            }
+        }
+        loop();
+
+        // --- Interactive Birthday Cake Logic ---
+        let candlesBlown = [false, false];
+
+        function extinguishCandle(event, index) {
+            event.stopPropagation();
+            candlesBlown[index] = true;
+            const candleEl = document.querySelectorAll('.candle')[index];
+            const flame = candleEl.querySelector('.flame');
+            if (flame) {
+                flame.style.display = 'none';
+            }
+            playSoundEffect('pop');
+            checkAllCandles();
+        }
+
+        function blowAllCandles() {
+            candlesBlown = [true, true];
+            const flames = document.querySelectorAll('.flame');
+            for (let i = 0; i < flames.length; i++) {
+                flames[i].style.display = 'none';
+            }
+            triggerConfettiShower();
+            document.getElementById('cake-status').innerText = "🎉 All candles blown out! Ian's birthday wish has been made!";
+            showModal("Wish Granted!", "Ian Patrick Batungbacal blew out the candles successfully! May all your dreams come true on your 27th birthday!", "🎂");
+        }
+
+        function checkAllCandles() {
+            let allTrue = true;
+            for (let i = 0; i < candlesBlown.length; i++) {
+                if (!candlesBlown[i]) allTrue = false;
+            }
+            if (allTrue) {
+                document.getElementById('cake-status').innerText = "🎉 All candles extinguished! Click 'Cut A Delicious Slice!' next.";
+                triggerConfettiShower();
+            } else {
+                document.getElementById('cake-status').innerText = "One candle blown out! Blow out the remaining one.";
+            }
+        }
+
+        function cutTheCake() {
+            playSoundEffect('cheer');
+            showModal("Delicious Cake Slice Served!", "A grand slice of chocolate-strawberry birthday cake has been served to Ian and all party guests!", "🍰");
+        }
+
+        function resetCake() {
+            candlesBlown = [false, false];
+            const flames = document.querySelectorAll('.flame');
+            for (let i = 0; i < flames.length; i++) {
+                flames[i].style.display = 'block';
+            }
+            document.getElementById('cake-status').innerText = "Candles are burning bright! Click the candles on the cake or use the button below to blow them out.";
+        }
+
+        function handleCakeInteraction() {
+            triggerGrandFinale();
+        }
+
+        // --- Audio & Voice Suite ---
+        let isPlayingMusic = false;
+        function togglePartyMusic() {
+            isPlayingMusic = !isPlayingMusic;
+            const btnText = document.getElementById('music-btn-text');
+            if (isPlayingMusic) {
+                btnText.innerText = "Pause Party Beats";
+                showModal("Party Music Active", "Synthesized birthday rhythm and celebratory beats are now playing!", "🎵");
+                playSoundEffect('horn');
+            } else {
+                btnText.innerText = "Play Party Beats";
+            }
+        }
+
+        function playSoundEffect(type) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'cheer' || type === 'horn') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.6);
+                } else {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(500, audioCtx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.2);
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.2);
+                }
+            } catch (e) {
+                console.log("Audio Context not allowed yet.");
+            }
+        }
+
+        // AI Voice Speech Synthesis
+        function speakAIGreeting() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const text = "Happy 27th Birthday to the incredible Ian Patrick Batungbacal! Wishing you joy, success, and endless celebration on November 18, 2026 at Evergreen Executive Village, Caloocan City!";
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+                showModal("AI Voice Active", "The AI party host is speaking Ian's birthday greeting aloud!", "🤖");
+            } else {
+                showModal("Notice", "Speech synthesis is not supported in your browser.", "ℹ️");
+            }
+        }
+
+        function stopAIGreeting() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        // Voice Recorder Simulator
+        let isRecording = false;
+        let recordTimer = 0;
+        let timerInterval = null;
+
+        function toggleRecordVoice() {
+            isRecording = !isRecording;
+            const btn = document.getElementById('record-action-btn');
+            const indicator = document.getElementById('recorder-indicator');
+            const statusText = document.getElementById('recorder-status-text');
+
+            if (isRecording) {
+                btn.innerHTML = '<i class="fa-solid fa-stop text-xs"></i> Stop';
+                btn.className = "bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-200 flex items-center gap-2";
+                indicator.className = "w-4 h-4 rounded-full bg-rose-500 animate-ping";
+                statusText.innerText = "Recording Birthday Voice Note...";
+                recordTimer = 0;
+                timerInterval = setInterval(function() {
+                    recordTimer++;
+                    let mins = Math.floor(recordTimer / 60).toString().padStart(2, '0');
+                    let secs = (recordTimer % 60).toString().padStart(2, '0');
+                    document.getElementById('recorder-timer').innerText = mins + ":" + secs;
+                }, 1000);
+            } else {
+                btn.innerHTML = '<i class="fa-solid fa-circle text-xs"></i> Record';
+                btn.className = "bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-xl text-sm font-bold transition duration-200 flex items-center gap-2";
+                indicator.className = "w-4 h-4 rounded-full bg-emerald-500";
+                statusText.innerText = "Voice Note Saved Successfully!";
+                clearInterval(timerInterval);
+                showModal("Voice Note Saved", "Ian's birthday voice recording has been safely stored in the party vault!", "🎙️");
+            }
+        }
+
+        // --- Voodoo & Aroma Handlers ---
+        function pokeVoodooDoll(index) {
+            const dolls = ["Captain Joy", "Madame Luck", "Wizard Bob"];
+            const blessings = [
+                "Captain Joy grants Ian unbreakable happiness and unstoppable positive energy today!",
+                "Madame Luck showers Ian with extraordinary fortune and amazing surprises!",
+                "Wizard Bob casts a spell of wisdom, health, and prosperity for Ian's 27th year!"
+            ];
+            playSoundEffect('pop');
+            document.getElementById('voodoo-msg').innerText = "✨ " + dolls[index] + ': "' + blessings[index] + '"';
+            showModal("Good-Luck Blessing!", dolls[index] + " says: " + blessings[index], "👻");
+        }
+
+        function triggerAroma(scentName) {
+            playSoundEffect('horn');
+            document.getElementById('aroma-display').innerText = "🌸 Aroma Released: " + scentName + " ✨";
+            showModal("Aroma Visualizer Active", "Luxurious " + scentName + " fragrance fills the party air for Ian Patrick Batungbacal!", "💨");
+        }
+
+        // --- Populate 100 Clowns & Party GIFs Gallery ---
+        const gifGrid = document.getElementById('gif-grid');
+        const clownEmojis = ['🤡', '🎈', '🎉', '🎊', '🥳', '🧁', '🎂', '🎁', '✨', '🍾'];
+        const clownTitles = [
+            "Circus Juggler", "Balloon Master", "Confetti King", "Party Animal", "Magical Clown", 
+            "Sugar Rush", "Birthday Star", "Joyful Giggles", "Sparkle Spark", "Champagne Pop"
+        ];
+
+        for (let i = 1; i <= 20; i++) {
+            const emoji = clownEmojis[i % clownEmojis.length];
+            const title = clownTitles[i % clownTitles.length];
+            const card = document.createElement('div');
+            card.className = "bg-slate-800/80 border border-pink-500/20 hover:border-pink-500/60 rounded-2xl p-4 text-center cursor-pointer transform hover:scale-105 transition duration-300 group shadow-lg";
+            card.onclick = (function(idx, t, em) {
+                return function() {
+                    playSoundEffect('pop');
+                    triggerConfettiShower();
+                    showModal("GIF #" + (idx * 5) + " - " + t, "Celebrating Ian Patrick Batungbacal with joyful clown energy and festive animations!", em);
+                };
+            })(i, title, emoji);
+            
+            card.innerHTML = '<div class="w-full h-24 bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-xl flex items-center justify-center text-4xl mb-3 group-hover:scale-110 transition duration-300">' + emoji + '</div>' +
+                             '<div class="font-bold text-sm text-pink-300 truncate">Party GIF #' + (i * 5) + '</div>' +
+                             '<div class="text-xs text-slate-400 mt-1">' + title + '</div>';
+            gifGrid.appendChild(card);
+        }
+    </script>
+</body>
+</html>
